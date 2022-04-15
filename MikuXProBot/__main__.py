@@ -60,7 +60,7 @@ buttons = [
                              url="https://t.me/Shukurenaiprobot?startgroup=true"),
                         InlineKeyboardButton(
                              text="🗞️ Repo",
-                             massage="private"),
+                             url="https://github.com/Sivatheboss88/ShukurenaiProbot"),
                     ],
                    [                  
                        InlineKeyboardButton(
