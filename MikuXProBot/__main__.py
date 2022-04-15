@@ -58,7 +58,7 @@ buttons = [
                         InlineKeyboardButton(
                              text="🏹 𝙰𝚍𝚍 𝚖𝚎 𝚢𝚘𝚞𝚛 𝚐𝚛𝚘𝚞𝚙",
                              url="https://t.me/Shukurenaiprobot?startgroup=true"),
-                        Massage(
+                        InlineKeyboardButton(
                              text="🗞️ Repo",
                              massage="private"),
                     ],
