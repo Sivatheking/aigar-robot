@@ -1,48 +1,46 @@
 import html
 import json
 import os
-from typing import Optional
+from typing import List, Optional
 
-from MikuXProbot import (DEV_USERS, OWNER_ID, DRAGONS, SUPPORT_CHAT, DEMONS,
-                          TIGERS, WOLVES, dispatcher)
-from MikuXProbot.modules.helper_funcs.chat_status import (dev_plus, sudo_plus,
-                                                           whitelist_plus)
-from MikuXProbot.modules.helper_funcs.extraction import extract_user
-from MikuXProbot.modules.log_channel import gloggable
-from telegram import ParseMode, TelegramError, Update
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
+                      Update, TelegramError)
+from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
-ELEVATED_USERS_FILE = os.path.join(os.getcwd(),
-                                   'MikuXProbot/elevated_users.json')
-
+from MikuXProBot import (
+    DEV_USERS,
+    OWNER_ID,
+    DRAGONS,
+    SUPPORT_CHAT,
+    DEMONS,
+    TIGERS,
+    WOLVES,
+    dispatcher,
+)
+from MikuXProBot.modules.helper_funcs.chat_status import (
+    dev_plus,
+    sudo_plus,
+    whitelist_plus,
+)
+from MikuXProBot.modules.helper_funcs.extraction import extract_user
+from MikuXProBot.modules.log_channel import gloggable
+import MikuXProBot.modules.sql.nation_sql as sql
+from telegram.ext.dispatcher import run_async
+from MikuXProBot.modules.helper_funcs.decorators import mikucmd
 
 def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
     bot = context.bot
     if not user_id:
-        reply = "That...is a chat! baka ka omae?"
+        return "That...is a chat! baka ka omae?"
 
     elif user_id == bot.id:
-        reply = "This does not work that way."
+        return "This does not work that way."
 
     else:
-        reply = None
-    return reply
+        return None
 
-
-# This can serve as a deeplink example.
-#disasters =
-# """ Text here """
-
-# do not async, not a handler
-#def send_disasters(update):
-#    update.effective_message.reply_text(
-#        disasters, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
-### Deep link example ends
-
-
-@run_async
+@mikucmd(command='addsudo')
 @dev_plus
 @gloggable
 def addsudo(update: Update, context: CallbackContext) -> str:
@@ -59,32 +57,28 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DRAGONS:
-        message.reply_text("This member is already a A Rank Hunter")
+        message.reply_text("This member is already a Sudo user")
         return ""
 
     if user_id in DEMONS:
-        rt += "Requested HA to promote a B Rank Hunter to A Rank Hunter."
-        data['supports'].remove(user_id)
+        rt += "Requested to promote a Support user to Sudo."
         DEMONS.remove(user_id)
 
     if user_id in WOLVES:
-        rt += "Requested HA to promote a D Rank Hunter to A Rank Hunter."
-        data['whitelists'].remove(user_id)
+        rt += "Requested to promote a Whitelist user to Sudo."
         WOLVES.remove(user_id)
 
-    data['sudos'].append(user_id)
+    # will add or update their role
+    sql.set_royal_role(user_id, "sudos")
     DRAGONS.append(user_id)
 
-    with open(ELEVATED_USERS_FILE, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
-
     update.effective_message.reply_text(
-        rt + "\nSuccessfully set Power Level {} to A Rank Hunter!".format(
-            user_member.first_name))
+        rt
+        + "\nSuccessfully promoted {} to Sudo!".format(
+            user_member.first_name
+        )
+    )
 
     log_message = (
         f"#SUDO\n"
@@ -92,13 +86,13 @@ def addsudo(update: Update, context: CallbackContext) -> str:
         f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
     )
 
-    if chat.type != 'private':
+    if chat.type != "private":
         log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
 
-@run_async
+@mikucmd(command='addsupport')
 @sudo_plus
 @gloggable
 def addsupport(
@@ -118,31 +112,24 @@ def addsupport(
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DRAGONS:
-        rt += "Requested HA to demote this A Rank Hunter to B Rank Hunter"
-        data['sudos'].remove(user_id)
+        rt += "Requested to demote this Sudo to Support"
         DRAGONS.remove(user_id)
 
     if user_id in DEMONS:
-        message.reply_text("This user is already a B Rank Hunter.")
+        message.reply_text("This user is already a Support user.")
         return ""
 
     if user_id in WOLVES:
-        rt += "Requested HA to promote this D Rank Hunter to B Rank Hunter"
-        data['whitelists'].remove(user_id)
+        rt += "Requested to promote this Whitelist user to Support"
         WOLVES.remove(user_id)
 
-    data['supports'].append(user_id)
+    sql.set_royal_role(user_id, "supports")
     DEMONS.append(user_id)
 
-    with open(ELEVATED_USERS_FILE, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
-
     update.effective_message.reply_text(
-        rt + f"\n{user_member.first_name} was added as a B Rank Hunter!")
+        rt + f"\n{user_member.first_name} was added as a Support user!"
+    )
 
     log_message = (
         f"#SUPPORT\n"
@@ -150,13 +137,13 @@ def addsupport(
         f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
     )
 
-    if chat.type != 'private':
+    if chat.type != "private":
         log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
 
-@run_async
+@mikucmd(command='addwhitelist')
 @sudo_plus
 @gloggable
 def addwhitelist(update: Update, context: CallbackContext) -> str:
@@ -173,32 +160,24 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DRAGONS:
-        rt += "This member is a A Rank Hunter, Demoting to D Rank Hunter."
-        data['sudos'].remove(user_id)
+        rt += "This member is a Sudo user, Demoting to Whitelisted user."
         DRAGONS.remove(user_id)
 
     if user_id in DEMONS:
-        rt += "This user is already a B Rank Hunter, Demoting to D Rank Hunter."
-        data['supports'].remove(user_id)
+        rt += "This user is already a Support user, Demoting to Whitelisted user."
         DEMONS.remove(user_id)
 
     if user_id in WOLVES:
-        message.reply_text("This user is already a D Rank Hunter.")
+        message.reply_text("This user is already a Whitelist user.")
         return ""
 
-    data['whitelists'].append(user_id)
+    sql.set_royal_role(user_id, "whitelists")
     WOLVES.append(user_id)
 
-    with open(ELEVATED_USERS_FILE, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
-
     update.effective_message.reply_text(
-        rt +
-        f"\nSuccessfully promoted {user_member.first_name} to a D Rank Hunter!")
+        rt + f"\nSuccessfully promoted {user_member.first_name} to a Whitelist user!"
+    )
 
     log_message = (
         f"#WHITELIST\n"
@@ -206,16 +185,16 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
         f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
     )
 
-    if chat.type != 'private':
+    if chat.type != "private":
         log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
 
-@run_async
+@mikucmd(command='addassistant')
 @sudo_plus
 @gloggable
-def addtiger(update: Update, context: CallbackContext) -> str:
+def addassistant(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
     user = update.effective_user
     chat = update.effective_chat
@@ -229,52 +208,42 @@ def addtiger(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DRAGONS:
-        rt += "This member is a A Rank Hunter, Demoting to C Rank Hunter."
-        data['sudos'].remove(user_id)
+        rt += "This member is a Sudo user, Demoting to Assistant."
         DRAGONS.remove(user_id)
 
     if user_id in DEMONS:
-        rt += "This user is already a B Rank Hunter, Demoting to C Rank Hunter."
-        data['supports'].remove(user_id)
+        rt += "This user is already a Support user, Demoting to Assistant."
         DEMONS.remove(user_id)
 
     if user_id in WOLVES:
-        rt += "This user is already a D Rank Hunter, Demoting to C Rank Hunter."
-        data['whitelists'].remove(user_id)
+        rt += "This user is already a Whitelist user, Demoting to Assistant."
         WOLVES.remove(user_id)
 
     if user_id in TIGERS:
-        message.reply_text("This user is already a C Rank Hunter.")
+        message.reply_text("This user is already a Assistant.")
         return ""
 
-    data['tigers'].append(user_id)
+    sql.set_royal_role(user_id, "Assistants")
     TIGERS.append(user_id)
 
-    with open(ELEVATED_USERS_FILE, 'w') as outfile:
-        json.dump(data, outfile, indent=4)
-
     update.effective_message.reply_text(
-        rt +
-        f"\nSuccessfully promoted {user_member.first_name} to a C Rank Hunter!"
+        rt + f"\nSuccessfully promoted {user_member.first_name} to a Tiger Nation!"
     )
 
     log_message = (
-        f"#TIGER\n"
+        f"#ASSISTANT\n"
         f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))} \n"
         f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
     )
 
-    if chat.type != 'private':
+    if chat.type != "private":
         log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
     return log_message
 
 
-@run_async
+@mikucmd(command='removesudo')
 @dev_plus
 @gloggable
 def removesudo(update: Update, context: CallbackContext) -> str:
@@ -290,16 +259,10 @@ def removesudo(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DRAGONS:
-        message.reply_text("Requested HA to demote this user to Civilian")
+        message.reply_text("Requested to demote this user to Civilian")
         DRAGONS.remove(user_id)
-        data['sudos'].remove(user_id)
-
-        with open(ELEVATED_USERS_FILE, 'w') as outfile:
-            json.dump(data, outfile, indent=4)
+        sql.remove_royal(user_id)
 
         log_message = (
             f"#UNSUDO\n"
@@ -307,18 +270,17 @@ def removesudo(update: Update, context: CallbackContext) -> str:
             f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
         )
 
-        if chat.type != 'private':
-            log_message = "<b>{}:</b>\n".format(html.escape(
-                chat.title)) + log_message
+        if chat.type != "private":
+            log_message = "<b>{}:</b>\n".format(html.escape(chat.title)) + log_message
 
         return log_message
 
     else:
-        message.reply_text("This user is not a A Rank Hunter!")
+        message.reply_text("This user is not a Sudo user!")
         return ""
 
 
-@run_async
+@mikucmd(command='removesupport')
 @sudo_plus
 @gloggable
 def removesupport(update: Update, context: CallbackContext) -> str:
@@ -334,16 +296,10 @@ def removesupport(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in DEMONS:
-        message.reply_text("Requested HA to demote this user to Civilian")
+        message.reply_text("Requested to demote this user to Civilian")
         DEMONS.remove(user_id)
-        data['supports'].remove(user_id)
-
-        with open(ELEVATED_USERS_FILE, 'w') as outfile:
-            json.dump(data, outfile, indent=4)
+        sql.remove_royal(user_id)
 
         log_message = (
             f"#UNSUPPORT\n"
@@ -351,17 +307,17 @@ def removesupport(update: Update, context: CallbackContext) -> str:
             f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
         )
 
-        if chat.type != 'private':
+        if chat.type != "private":
             log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
 
     else:
-        message.reply_text("This user is not a B Rank Hunter!")
+        message.reply_text("This user is not a Support user!")
         return ""
 
 
-@run_async
+@mikucmd(command='removewhitelist')
 @sudo_plus
 @gloggable
 def removewhitelist(update: Update, context: CallbackContext) -> str:
@@ -377,16 +333,10 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in WOLVES:
         message.reply_text("Demoting to normal user")
         WOLVES.remove(user_id)
-        data['whitelists'].remove(user_id)
-
-        with open(ELEVATED_USERS_FILE, 'w') as outfile:
-            json.dump(data, outfile, indent=4)
+        sql.remove_royal(user_id)
 
         log_message = (
             f"#UNWHITELIST\n"
@@ -394,19 +344,19 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
             f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
         )
 
-        if chat.type != 'private':
+        if chat.type != "private":
             log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
     else:
-        message.reply_text("This user is not a D Rank Hunter!")
+        message.reply_text("This user is not a Whitelist user!")
         return ""
 
 
-@run_async
+@mikucmd(command='removeassistant')
 @sudo_plus
 @gloggable
-def removetiger(update: Update, context: CallbackContext) -> str:
+def removeassistant(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
     user = update.effective_user
     chat = update.effective_chat
@@ -419,238 +369,105 @@ def removetiger(update: Update, context: CallbackContext) -> str:
         message.reply_text(reply)
         return ""
 
-    with open(ELEVATED_USERS_FILE, 'r') as infile:
-        data = json.load(infile)
-
     if user_id in TIGERS:
         message.reply_text("Demoting to normal user")
         TIGERS.remove(user_id)
-        data['tigers'].remove(user_id)
-
-        with open(ELEVATED_USERS_FILE, 'w') as outfile:
-            json.dump(data, outfile, indent=4)
+        sql.remove_royal(user_id)
 
         log_message = (
-            f"#UNTIGER\n"
+            f"#UNASSISTANT\n"
             f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             f"<b>User:</b> {mention_html(user_member.id, html.escape(user_member.first_name))}"
         )
 
-        if chat.type != 'private':
+        if chat.type != "private":
             log_message = f"<b>{html.escape(chat.title)}:</b>\n" + log_message
 
         return log_message
     else:
-        message.reply_text("This user is not a Tiger Disaster!")
+        message.reply_text("This user is not a Tiger Nation!")
         return ""
 
 
-@run_async
+
+@mikucmd(command='whitelists')
 @whitelist_plus
-def whitelistlist(update: Update, context: CallbackContext):
-    reply = "<b>Known D Rank Hunters 🐺:</b>\n"
+def whitelists(update: Update, context: CallbackContext):
     bot = context.bot
+    reply = "<b>Known Neptunia Nations :</b>\n"
     for each_user in WOLVES:
         user_id = int(each_user)
         try:
             user = bot.get_chat(user_id)
 
-            reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-
-@run_async
+@mikucmd(command='assistants')
 @whitelist_plus
-def tigerlist(update: Update, context: CallbackContext):
-    reply = "<b>Known C Rank Hunters 🐯:</b>\n"
+def Beasts(update: Update, context: CallbackContext):
     bot = context.bot
+    reply = "<b>Known Assistants :</b>\n"
     for each_user in TIGERS:
         user_id = int(each_user)
         try:
             user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-
-@run_async
+@mikucmd(command=["supportlist", "beasts"])
 @whitelist_plus
 def supportlist(update: Update, context: CallbackContext):
     bot = context.bot
-    reply = "<b>Known B Rank Hunters 👹:</b>\n"
+    reply = "<b>Known Sakura Nations :</b>\n"
     for each_user in DEMONS:
         user_id = int(each_user)
         try:
             user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-
-@run_async
+@mikucmd(command=["sudolist", "royals"])
 @whitelist_plus
 def sudolist(update: Update, context: CallbackContext):
     bot = context.bot
     true_sudo = list(set(DRAGONS) - set(DEV_USERS))
-    reply = "<b>Known A Rank Hunters 🐉:</b>\n"
+    reply = "<b>Known Royals :</b>\n"
     for each_user in true_sudo:
         user_id = int(each_user)
         try:
             user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-
-@run_async
+@mikucmd(command=["devlist", "Rulers"])
 @whitelist_plus
 def devlist(update: Update, context: CallbackContext):
     bot = context.bot
     true_dev = list(set(DEV_USERS) - {OWNER_ID})
-    reply = "<b>S Rank Hunters ⚡️:</b>\n"
+    reply = "<b>Rulers :</b>\n"
     for each_user in true_dev:
         user_id = int(each_user)
         try:
             user = bot.get_chat(user_id)
-            reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
+            reply += f"• {mention_html(user_id, user.first_name)}\n"
         except TelegramError:
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-__help__ = f"""
-*⚠️ Notice:*
-Commands listed here only work for users with special access are mainly used for troubleshooting, debugging purposes.
-Group admins/group owners do not need these commands. 
+from MikuXProBot.modules.language import gs
 
- ╔ *List all special users:*
- ╠ `/aranks`*:* Lists all A Rank Hunters
- ╠ `/branks`*:* Lists all B Rank Hunters
- ╠ `/cranks`*:* Lists all C Rank Hunters
- ╠ `/dranks`*:* Lists all D Rank Hunters
- ╠ `/sranks`*:* Lists all S Rank Hunters
- ╠ `/addarank`*:* Adds a user to A Rank Hunter
- ╠ `/addbrank`*:* Adds a user to B Rank Hunter
- ╠ `/addcrank`*:* Adds a user to C Rank Hunter
- ╠ `/adddrank`*:* Adds a user to D Rank Hunter
- ╚ `Add dev doesnt exist, devs should know how to add themselves`
+def get_help(chat):
+    return gs(chat, "nation_help")
 
- ╔ *Ping:*
- ╠ `/ping`*:* gets ping time of bot to telegram server
- ╚ `/pingall`*:* gets all listed ping times
 
- ╔ *Broadcast: (Bot owner only)*
- ╠  *Note:* This supports basic markdown
- ╠ `/broadcastall`*:* Broadcasts everywhere
- ╠ `/broadcastusers`*:* Broadcasts too all users
- ╚ `/broadcastgroups`*:* Broadcasts too all groups
-
- ╔ *Groups Info:*
- ╠ `/groups`*:* List the groups with Name, ID, members count as a txt
- ╠ `/leave <ID>`*:* Leave the group, ID must have hyphen
- ╠ `/stats`*:* Shows overall bot stats
- ╠ `/getchats`*:* Gets a list of group names the user has been seen in. Bot owner only
- ╚ `/ginfo username/link/ID`*:* Pulls info panel for entire group
-
- ╔ *Access control:* 
- ╠ `/ignore`*:* Blacklists a user from 
- ╠  using the bot entirely
- ╠ `/notice`*:* Removes user from blacklist
- ╚ `/ignoredlist`*:* Lists ignored users
-
- ╔ *Module loading:*
- ╠ `/listmodules`*:* Prints modules and their names
- ╠ `/unload <name>`*:* Unloads module dynamically
- ╚ `/load <name>`*:* Loads module
-
- ╔ *Speedtest:*
- ╚ `/speedtest`*:* Runs a speedtest and gives you 2 options to choose from, text or image output
-
- ╔ *Global Bans:*
- ╠ `/gban user reason`*:* Globally bans a user
- ╚ `/ungban user reason`*:* Unbans the user from the global bans list
-
- ╔ *Module loading:*
- ╠ `/listmodules`*:* Lists names of all modules
- ╠ `/load modulename`*:* Loads the said module to 
- ╠   memory without restarting.
- ╠ `/unload modulename`*:* Loads the said module from
- ╚   memory without restarting.memory without restarting the bot 
-
- ╔ *Remote commands:*
- ╠ `/rban user group`*:* Remote ban
- ╠ `/runban user group`*:* Remote un-ban
- ╠ `/rpunch user group`*:* Remote punch
- ╠ `/rmute user group`*:* Remote mute
- ╚ `/runmute user group`*:* Remote un-mute
-
- ╔ *Windows self hosted only:*
- ╠ `/reboot`*:* Restarts the bots service
- ╚ `/gitpull`*:* Pulls the repo and then restarts the bots service
-
- ╔ *Chatbot:* 
- ╚ `/listaichats`*:* Lists the chats the chatmode is enabled in
- 
- ╔ *Debugging and Shell:* 
- ╠ `/debug <on/off>`*:* Logs commands to updates.txt
- ╠ `/logs`*:* Run this in support group to get logs in pm
- ╠ `/eval`*:* Self explanatory
- ╠ `/sh`*:* Runs shell command
- ╠ `/shell`*:* Runs shell command
- ╠ `/clearlocals`*:* As the name goes
- ╠ `/dbcleanup`*:* Removes deleted accs and groups from db
- ╚ `/py`*:* Runs python code
- 
- ╔ *Global Bans:*
- ╠ `/gban <id> <reason>`*:* Gbans the user, works by reply too
- ╠ `/ungban`*:* Ungbans the user, same usage as gban
- ╚ `/gbanlist`*:* Outputs a list of gbanned users
-
-Visit @{SUPPORT_CHAT} for more information.
-"""
-
-SUDO_HANDLER = CommandHandler(("addsudo", "addarank"), addsudo)
-SUPPORT_HANDLER = CommandHandler(("addsupport", "addbrank"), addsupport)
-TIGER_HANDLER = CommandHandler(("addtiger" , "addcrank"), addtiger)
-WHITELIST_HANDLER = CommandHandler(("addwhitelist", "adddrank"), addwhitelist)
-UNSUDO_HANDLER = CommandHandler(("removesudo", "removearank"), removesudo)
-UNSUPPORT_HANDLER = CommandHandler(("removesupport", "removebrank"),
-                                   removesupport)
-UNTIGER_HANDLER = CommandHandler(("removetiger" , "removecrank"), removetiger)
-UNWHITELIST_HANDLER = CommandHandler(("removewhitelist", "removedrank"),
-                                     removewhitelist)
-
-WHITELISTLIST_HANDLER = CommandHandler(["whitelistlist", "dranks"],
-                                       whitelistlist)
-TIGERLIST_HANDLER = CommandHandler(["tigers" , "cranks"], tigerlist)
-SUPPORTLIST_HANDLER = CommandHandler(["supportlist", "branks"], supportlist)
-SUDOLIST_HANDLER = CommandHandler(["sudolist", "aranks"], sudolist)
-DEVLIST_HANDLER = CommandHandler(["devlist", "sranks"], devlist)
-
-dispatcher.add_handler(SUDO_HANDLER)
-dispatcher.add_handler(SUPPORT_HANDLER)
-dispatcher.add_handler(TIGER_HANDLER)
-dispatcher.add_handler(WHITELIST_HANDLER)
-dispatcher.add_handler(UNSUDO_HANDLER)
-dispatcher.add_handler(UNSUPPORT_HANDLER)
-dispatcher.add_handler(UNTIGER_HANDLER)
-dispatcher.add_handler(UNWHITELIST_HANDLER)
-
-dispatcher.add_handler(WHITELISTLIST_HANDLER)
-dispatcher.add_handler(TIGERLIST_HANDLER)
-dispatcher.add_handler(SUPPORTLIST_HANDLER)
-dispatcher.add_handler(SUDOLIST_HANDLER)
-dispatcher.add_handler(DEVLIST_HANDLER)
-
-__mod_name__ = "📈Ranks"
-__handlers__ = [
-    SUDO_HANDLER, SUPPORT_HANDLER, TIGER_HANDLER, WHITELIST_HANDLER,
-    UNSUDO_HANDLER, UNSUPPORT_HANDLER, UNTIGER_HANDLER, UNWHITELIST_HANDLER,
-    WHITELISTLIST_HANDLER, TIGERLIST_HANDLER, SUPPORTLIST_HANDLER,
-    SUDOLIST_HANDLER, DEVLIST_HANDLER
-]
+__mod_name__ = "Nations"
