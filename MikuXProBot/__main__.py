@@ -56,11 +56,11 @@ def get_readable_time(seconds: int) -> str:
 buttons = [
     [
                         InlineKeyboardButton(
-                             text="🏹 Summon Me",
-                             url="https://t.me/MikuXProBot?startgroup=true"),
-                        InlineKeyboardButton(
+                             text="🏹 𝙰𝚍𝚍 𝚖𝚎 𝚢𝚘𝚞𝚛 𝚐𝚛𝚘𝚞𝚙",
+                             url="https://t.me/Shukurenaiprobot?startgroup=true"),
+                        Massage(
                              text="🗞️ Repo",
-                             url="https://github.com/h0daka/Miku-Nakano"),
+                             massage="private"),
                     ],
                    [                  
                        InlineKeyboardButton(
@@ -86,7 +86,7 @@ For all command use /* [or](https://telegra.ph/file/85a404cf9edbd797c829f.jpg) *
     dispatcher.bot.first_name,""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\nKindly use ! for commands if / is not working\n")
 
-DONATE_STRING = """ Adding Me To Your Groups Is Donation For Me """
+DONATE_STRING = """ ᴀɴʏ ɪssᴜᴇs ᴄᴏɴᴀᴛᴀᴄᴛ @Sivatheboss """
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -214,7 +214,7 @@ def start(update: Update, context: CallbackContext):
                   [                  
                        InlineKeyboardButton(
                              text="🚑 Support",
-                             url=f"https://t.me/MikusSupport"),
+                             url=f"https://t.me/shu_chats"),
                        InlineKeyboardButton(
                              text="🛰️ Updates",
                              url="https://t.me/MikuXUpdates")
