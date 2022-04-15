@@ -592,7 +592,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.send_message(f"@Shu_chats", f"[I'm In Online]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
+            dispatcher.bot.send_message(f"@Shu_chats", f"00[𝙸'𝚊𝚖 𝚛𝚎𝚊𝚍𝚢 𝚝𝚘 𝚋𝚊𝚝𝚝𝚕𝚎]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
