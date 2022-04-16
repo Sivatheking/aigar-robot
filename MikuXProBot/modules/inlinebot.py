@@ -59,38 +59,38 @@ def inlinequery(update: Update, _) -> None:
             "keyboard": ".spb ",
         },
         {
-            "title": "Account info on Miku",
-            "description": "Look up a Telegram account in Miku database",
-            "message_text": "Click the button below to look up a person in Miku database using their Telegram ID",
+            "title": "Account info on Shu",
+            "description": "Look up a Telegram account in Shu database",
+            "message_text": "Click the button below to look up a person in Shu database using their Telegram ID",
             "thumb_urL": "https://telegra.ph/file/d687f2d9867d7edfa0506.jpg",
             "keyboard": ".info ",
         },
         {
             "title": "About",
-            "description": "Know about Miku",
+            "description": "Know about Shu",
             "message_text": "Click the button below to get to know about Miku.",
-            "thumb_urL": "https://telegra.ph/file/99d8f926d6b99c6cb826c.jpg",
+            "thumb_urL": "https://telegra.ph/file/6513527f063c4f00a6806.jpg",
             "keyboard": ".about ",
         },
         {
             "title": "Help",
             "description": "Help Inline Commands",
             "message_text": "Click the button below to get Help Of Inline Commands.",
-            "thumb_urL": "https://telegra.ph/file/65a47304643fcdb34f0a7.jpg",
+            "thumb_urL": "https://telegra.ph/file/6513527f063c4f00a6806.jpg",
             "keyboard": ".help ",
         },
         {
             "title": "Anilist",
             "description": "Search anime and manga on AniList.co",
             "message_text": "Click the button below to search anime and manga on AniList.co",
-            "thumb_urL": "https://telegra.ph/file/561a53ed2800f4dccbe30.jpg",
+            "thumb_urL": "https://telegra.ph/file/6513527f063c4f00a6806.jpg",
             "keyboard": ".anilist ",
         },
         {
             "title": "Paste",
             "description": "Paste <text> on pastebin.",
             "message_text": "Click the button below to Paste on pastebin.",
-            "thumb_urL": "https://telegra.ph/file/561a53ed2800f4dccbe30.jpg",
+            "thumb_urL": "https://telegra.ph/file/ca91b17ebf942ca00d9a2.jpg",
             "keyboard": ".paste ",
         },
     ]
@@ -212,7 +212,7 @@ def inlineinfo(query: str, update: Update, context: CallbackContext) -> None:
             [
                 InlineKeyboardButton(
                     text="Report Error",
-                    url=f"https://t.me/MikusSupport",
+                    url=f"https://t.me/Shu_chats",
                 ),
                 InlineKeyboardButton(
                     text="Search again",
@@ -226,7 +226,7 @@ def inlineinfo(query: str, update: Update, context: CallbackContext) -> None:
     results = [
         InlineQueryResultArticle(
             id=str(uuid4()),
-            thumb_url="https://telegra.ph/file/d687f2d9867d7edfa0506.jpg",
+            thumb_url="https://telegra.ph/file/1c24b51d7d1830ee5b626.jpg",
             title=f"User info of {html.escape(user.first_name)}",
             input_message_content=InputTextMessageContent(text, parse_mode=ParseMode.HTML,
                                                           disable_web_page_preview=True),
@@ -244,7 +244,7 @@ def about(query: str, update: Update, context: CallbackContext) -> None:
     user = context.bot.get_chat(user_id)
     sql.update_user(user.id, user.username)
     about_text = f"""
-    [Miku ❤️](https://t.me/MikuXproBot)\n*Bot State:* `Alive`\n*Python:* `{python_version()}`\n*Pyrogram:* `{pyrover}`\n*Platform:* `{sys.platform}`\n*python-telegram-bot:* `v{str(__version__)}`
+    [sʜᴜ ❤️](https://t.me/Shukurenaiprobot)\n*Bot State:* `Alive`\n*Python:* `{python_version()}`\n*Pyrogram:* `{pyrover}`\n*Platform:* `{sys.platform}`\n*python-telegram-bot:* `v{str(__version__)}`
     """
     results: list = []
     kb = InlineKeyboardMarkup(
