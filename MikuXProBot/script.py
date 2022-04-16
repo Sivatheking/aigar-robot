@@ -1,4 +1,4 @@
-PM_START_TEXT = """────「 [{}]({}) 」────\n*Hello {}!*\n*I'm An Anime Themed Advance Group Management Bot*\n\n❍ *Uptime:* `{}`\n❍ `{}` *Users, Across* `{}` *Chats*\n\n*Click The Help Button To Get List Of My Commands.*\nThanks To @MikuXProBot For Repo"""
+PM_START_TEXT = """────「 [{}]({}) 」────\n*Hello {}!*\n*I'm An Anime Themed Advance Group Management Bot*\n\n❍ *Uptime:* `{}`\n❍ `{}` *Users, Across* `{}` *Chats*\n\n*Click The Help Button To Get List Of My Commands.*\n𝚓𝚘𝚒𝚗 𝚖𝚢 𝚜𝚞𝚙𝚙𝚘𝚛𝚝 @Shu_chats 𝚌𝚘𝚗𝚝𝚊𝚌𝚝 @Sivatheboss"""
 
 MIKU_IMG = (
       "https://telegra.ph/file/4f17fdcc9470cc62b8c09.jpg",
