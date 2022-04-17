@@ -214,10 +214,10 @@ def start(update: Update, context: CallbackContext):
                   [                  
                        InlineKeyboardButton(
                              text="🚑 Support",
-                             url=f"https://t.me/shu_chats"),
+                             url=f"https://t.me/shubots"),
                        InlineKeyboardButton(
                              text="🛰️ Updates",
-                             url="https://t.me/shu_Updates")
+                             url="https://t.me/shubots_Updates")
                      ] 
                 ]
             ),
@@ -275,7 +275,7 @@ def help_button(update, context):
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Back",
                                        callback_data="help_back"),
                   InlineKeyboardButton(text="Support",
-                                       url="t.me/Mikussupport")]]))
+                                       url="t.me/shubots")]]))
 
         elif prev_match:
             curr_page = int(prev_match.group(1))
@@ -333,8 +333,8 @@ def miku_callback_data(update, context):
                     InlineKeyboardButton(text="✨ Try Inline", switch_inline_query_current_chat="",),
                  ],
                  [
-                    InlineKeyboardButton(text="🕊️ Updates", url="t.me/shuupdates"),
-                    InlineKeyboardButton(text="🚑 Support", url="t.me/shu_chats"),
+                    InlineKeyboardButton(text="🕊️ Updates", url="t.me/shubots_updates"),
+                    InlineKeyboardButton(text="🚑 Support", url="t.me/shubots"),
                  ],
                  [
                     InlineKeyboardButton(text="❌ Back", callback_data="miku_back")
@@ -382,7 +382,7 @@ def get_help(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                 [
                   [
-                  InlineKeyboardButton(text=" Click here", url="https://t.me/Shukurenaiprobot?start=help")
+                  InlineKeyboardButton(text=" Click here", url="https://t.me/ShukurenaiProbot?start=help")
                   ]
                 ]
             ),
@@ -399,7 +399,7 @@ def get_help(update: Update, context: CallbackContext):
                 [[InlineKeyboardButton(text="Back",
                                        callback_data="help_back"),
                   InlineKeyboardButton(text="Support",
-                                       url="t.me/Shu_chats")]]))
+                                       url="t.me/Shubots")]]))
 
     else:
         send_help(chat.id, HELP_STRINGS)
@@ -592,12 +592,12 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.send_message(f"@Shu_chats", f"[𝙸'𝚊𝚖 𝚛𝚎𝚊𝚍𝚢 𝚝𝚘 𝚋𝚊𝚝𝚝𝚕𝚎]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
+            dispatcher.bot.send_message(f"@Shubots", f"[𝙸'𝚊𝚖 𝚛𝚎𝚊𝚍𝚢 𝚝𝚘 𝚋𝚊𝚝𝚝𝚕𝚎]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
                        InlineKeyboardButton(
-                             text="[► Summon Me◄]",
+                             text="[► Add me◄]",
                              url="https://t.me/Shukurenaiprobot?startgroup=true")
                      ] 
                 ]
