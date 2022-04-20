@@ -48,7 +48,7 @@ from MikuXProBot.modules.helper_funcs.chat_status import sudo_plus
 from MikuXProBot.modules.helper_funcs.extraction import extract_user
 from MikuXProBot import telethn
 
-MIKU_IMG = "https://telegra.ph/file/e3be4035a03c7ecb6b24e.jpg"
+MIKU_IMG = "https://telegra.ph//file/f71503154ddf060c00534.jpg"
 
 def no_by_per(totalhp, percentage):
     """
@@ -240,10 +240,10 @@ def info(update: Update, context: CallbackContext):
     [
                         InlineKeyboardButton(
                              text="Health",
-                             url="https://t.me/MikuXproBot?start=health"),
+                             url="https://t.me/ShukurenaiPRobot?start=health"),
                        InlineKeyboardButton(
                              text="Disasters",
-                             url="https://t.me/MikuXproBot?start=disasters"),
+                             url="https://t.me/ShukurenaiPRobot?start=disasters"),
                     ],
     ]
     user_id = extract_user(update.effective_message, args)
@@ -476,7 +476,7 @@ def stats(update, context):
                   [                  
                        InlineKeyboardButton(
                              text="Repo",
-                             url="github.com/H0daka/Miku-Nakano")
+                             url="github.com/Sivatheboss88/ShukurenaiProbot")
                      ] 
                 ]
             ),
@@ -489,9 +489,9 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [Updates](https://t.me/MikuXUpdates)\n\n"
+                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [owner](https://t.me/Sivatheboss)\n\n"
                 )
-                + "╘══「 by [卄σ∂αкα](https://t.me/h0daka) 」\n"
+                + "╘══「 by [Shu kurenai](https://t.me/h0daka) 」\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
@@ -499,7 +499,7 @@ def stats(update, context):
                   [                  
                        InlineKeyboardButton(
                              text="Repo",
-                             url="github.com/H0daka/Miku-Nakano")
+                             url="github.com/Sivatheboss88/ShukurenaiProbot")
                      ] 
                 ]
             ),
