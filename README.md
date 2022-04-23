@@ -57,42 +57,9 @@ The Easiest Way to Deploy This Bot is Via Heroku.
 	
   <h1>
     <p align="center">
-        <a href="https://heroku.com/deploy?template=https://github.com/h0daka/Miku-Nakano">
+        <a href="https://heroku.com/deploy?template=https://github.com/Sivatheboss88/ShukurenaiProbot">
             <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
         </a>
     </p>
 </h1>
 
-</details>
-<details>
-    <summary>More Deploy Options</summary>
-    <br>
-    <p align="center">
-
-    Deploying on Local Machine
-
-</p>
-
-```console
-    ~$ git clone https://github.com/h0daka/Miku-Nakano
-    ~$ cd Miku-Nakano
-    ~$ cp sample_config.py config.py
-```
-
-Edit Config.py with your own Values
-
-Start with ```python -m MikuXProBot```
-
-</details>    
-
-<details>
-     <summary>Deploying On IDE VMs Like Repl.it</summary>
-       <br>
-         <p align="left">
-            <b> 
-
-            Refer to Deploying On Local Machine.
-
- </b>
-</p>
-</details>
