@@ -1,5 +1,4 @@
 {
----------------------------------------------------------------------
       "name": "shu kurenai",
       "description": "An Anime themed Telegram group management bot.",
       "logo": "https://telegra.ph/file/bc219808c6d888fc72260.jpg",
@@ -9,7 +8,6 @@
          "group",
          "manager",
          "Shu"
--------------------------------------------------------------------------------------------------
       ],   
    "repository": "https://github.com/Sivatheking/ShukurenaiPRobot/tree/Shukurenai-1",
    "addons": [
