@@ -49,7 +49,7 @@ This repo was just reamped to suit an Anime-centric community. All original cred
 The Support group can be reached out to at [Miku • Support](https://t.me/MikusSupport), where you can ask for help about [Miku Nakano](https://t.me/Mikuxprobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
 <details>
-<center>Heroku Deploy</center>
+         <summery>Heroku Deploy</summery>
 	<br>
 	<b>
 The Easiest Way to Deploy This Bot is Via Heroku.
