@@ -60,7 +60,7 @@ buttons = [
                              url="https://t.me/Shukurenaiprobot?startgroup=true"),
                         InlineKeyboardButton(
                              text="🗞️ Repo",
-                             url="https://github.com/Sivatheboss88/ShukurenaiProbot"),
+                             url="https://github.com/Sivatheking/ShukurenaiProbot"),
                     ],
                    [                  
                        InlineKeyboardButton(
@@ -86,7 +86,7 @@ For all command use /* [or](https://telegra.ph/file/1c24b51d7d1830ee5b626.jpg) *
     dispatcher.bot.first_name,""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\nKindly use ! for commands if / is not working\n")
 
-DONATE_STRING = """ ᴀɴʏ ɪssᴜᴇs ᴄᴏɴᴀᴛᴀᴄᴛ @Sivatheboss """
+DONATE_STRING = """ ANY ISSUES CONTACT OWNER @Sivatheboss """
 
 IMPORTED = {}
 MIGRATEABLE = []
