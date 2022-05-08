@@ -51,7 +51,8 @@ The Support group can be reached out to at [Miku • Support](https://t.me/Mikus
 
 
 #	<h1> Deploy to heroku 
-    <p align="center">
+   
+       <p align="center">
         <a href="https://heroku.com/deploy?template=https://github.com/Sivatheking/ShukurenaiPRobot">
             <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
         </a>
