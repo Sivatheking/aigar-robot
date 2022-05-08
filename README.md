@@ -62,7 +62,7 @@ The Easiest Way to Deploy This Bot is Via Heroku.
             <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
         </a>
         </a>
-       </a>
+       </p>
    
 </h1>
 
