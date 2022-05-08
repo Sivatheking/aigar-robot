@@ -48,7 +48,7 @@ This repo was just reamped to suit an Anime-centric community. All original cred
 
 The Support group can be reached out to at [Miku • Support](https://t.me/MikusSupport), where you can ask for help about [Miku Nakano](https://t.me/Mikuxprobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available
 
--	<h1> Deploy to heroku >
+	#<h1> Deploy to heroku 
     <p align="center">
         <a href="https://heroku.com/deploy?template=https://github.com/Sivatheking/ShukurenaiPRobot">
             <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
