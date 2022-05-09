@@ -1,5 +1,6 @@
-![Miku]
-# 𝓜𝓲𝓴𝓾 𝓝𝓪𝓴𝓪𝓷𝓸
+![Miku](https://telegra.ph/file/6513527f063c4f00a6806.jpg)
+# ShukurenaiPRobot
+
 <h3 align="center"> 
     A Modular Telegram Python Bot Running On Python3 With Mongo DB, Sqlalchemy, Redis Database.
 </h3>
@@ -8,7 +9,7 @@
     <a href="https://python.org">
         <img src="http://forthebadge.com/images/badges/made-with-python.svg" alt="made-with-python">
     </a>
-<a href="https://GitHub.com/h0daka">
+<a href="https://GitHub.com/Sivatheking">
         <img src="http://ForTheBadge.com/images/badges/built-with-love.svg" alt="built-with-love">
     </a>
 <img src="https://img.shields.io/badge/python-3.10.1-green?style=for-the-badge&logo=appveyor" alt="Python Version">
@@ -29,24 +30,18 @@
 
 ╘══「 Can be found on telegram as [Miku Nakano](https://t.me/Mikuxprobot) 」
 
-![Miku](https://telegra.ph/file/9d78988131658606a3d57.jpg)
+![Shu](https://telegra.ph/file/6513527f063c4f00a6806.jpg)
 
 ### ╒═══「 Creator Info/Credits 」
 
-+  [Hodaka](https://github.com/h0daka) : OWNER | DEV
-+  [Rajkumar](https://github.com/Awesome-RJ) : BASE
-+  [Hirojazz](https://github.com/Hirojazz) : BASE
-+  [Dank-del](https://github.com/Dank-del) : BASE 
++  [Sivatheboss old](https://github.com/Sivatheboss88) : OWNER | DEV
++  [Siva the boss new](https://github.com/Sivatheking) : OWNER | DEV
 
 ╘══「 Any other authorship/credits can be seen through the commits. 」
 
-## ╒═══「 Credits 」
-The bot is based of on the original work done by [PaulSonOfLars](https://github.com/PaulSonOfLars)
-This repo was just reamped to suit an Anime-centric community. All original credits go to Paul and his dedication, Without his efforts, this fork would not have been possible!
-
 ### ╒═══「 Support Group 」 
 
-The Support group can be reached out to at [Miku • Support](https://t.me/MikusSupport), where you can ask for help about [Miku Nakano](https://t.me/Mikuxprobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
+The Support group can be reached out to at [Shu • Support](https://t.me/shubots), where you can ask for help about [ShukurenaiPRobot](https://t.me/shukurenaiprobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
 <details>
 	<summary>Heroku Deploy</summary>
