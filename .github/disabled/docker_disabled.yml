@@ -24,7 +24,7 @@ jobs:
 
         with:
 
-          name:  h0daka/Miku-Nakano
+          name:  Sivatheking/ShukurenaiPRobot
 
           username: ${{ secrets.DOCKER_USERNAME }}
 
