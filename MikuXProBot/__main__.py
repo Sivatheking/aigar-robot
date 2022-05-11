@@ -57,7 +57,7 @@ buttons = [
     [
                         InlineKeyboardButton(
                              text="🏹 𝙰𝚍𝚍 𝚖𝚎 𝚢𝚘𝚞𝚛 𝚐𝚛𝚘𝚞𝚙",
-                             url="https://t.me/Shukurenaiprobot?startgroup=true"),
+                             url="https://t.me/aigarrobot?startgroup=true"),
                         InlineKeyboardButton(
                              text="🗞️ Repo",
                              url="https://github.com/Sivatheboss88/ShukurenaiProbot"),
@@ -81,7 +81,7 @@ HELP_STRINGS = """
  • /settings:
    • in PM: will send you your settings for all supported modules.
    • in a group: will redirect you to pm, with all that chat's settings.
-For all command use /* [or](https://telegra.ph/file/1c24b51d7d1830ee5b626.jpg) *!*
+For all command use /* [or](https://telegra.ph//file/f7b2cd754e2c19cfe8ac2.jpg) *!*
 """.format(
     dispatcher.bot.first_name,""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\nKindly use ! for commands if / is not working\n")
@@ -214,10 +214,10 @@ def start(update: Update, context: CallbackContext):
                   [                  
                        InlineKeyboardButton(
                              text="🚑 Support",
-                             url=f"https://t.me/shubots"),
+                             url=f"https://t.me/aigar_support"),
                        InlineKeyboardButton(
                              text="🛰️ Updates",
-                             url="https://t.me/shubots_Updates")
+                             url="https://t.me/aigar_Updates")
                      ] 
                 ]
             ),
@@ -275,7 +275,7 @@ def help_button(update, context):
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Back",
                                        callback_data="help_back"),
                   InlineKeyboardButton(text="Support",
-                                       url="t.me/shubots")]]))
+                                       url="t.me/aigar_support")]]))
 
         elif prev_match:
             curr_page = int(prev_match.group(1))
@@ -329,12 +329,12 @@ def miku_callback_data(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="🌏 My Master", url="t.me/Sivatheboss"),
+                    InlineKeyboardButton(text="🌏 My Master", url="t.me/Sivathe_boss"),
                     InlineKeyboardButton(text="✨ Try Inline", switch_inline_query_current_chat="",),
                  ],
                  [
-                    InlineKeyboardButton(text="🕊️ Updates", url="t.me/shubots_updates"),
-                    InlineKeyboardButton(text="🚑 Support", url="t.me/shubots"),
+                    InlineKeyboardButton(text="🕊️ Updates", url="t.me/aigar_updates"),
+                    InlineKeyboardButton(text="🚑 Support", url="t.me/aigar_support"),
                  ],
                  [
                     InlineKeyboardButton(text="❌ Back", callback_data="miku_back")
@@ -382,7 +382,7 @@ def get_help(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                 [
                   [
-                  InlineKeyboardButton(text=" Click here", url="https://t.me/ShukurenaiProbot?start=help")
+                  InlineKeyboardButton(text=" Click here", url="https://t.me/aigarrobot?start=help")
                   ]
                 ]
             ),
@@ -399,7 +399,7 @@ def get_help(update: Update, context: CallbackContext):
                 [[InlineKeyboardButton(text="Back",
                                        callback_data="help_back"),
                   InlineKeyboardButton(text="Support",
-                                       url="t.me/Shubots")]]))
+                                       url="t.me/aigar_support")]]))
 
     else:
         send_help(chat.id, HELP_STRINGS)
@@ -592,13 +592,13 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.send_message(f"@Shubots", f"[𝙸'𝚊𝚖 𝚛𝚎𝚊𝚍𝚢 𝚝𝚘 𝚋𝚊𝚝𝚝𝚕𝚎]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
+            dispatcher.bot.send_message(f"@aigar_support", f"[𝙸'𝚊𝚖 𝚛𝚎𝚊𝚍𝚢 𝚝𝚘 𝚋𝚊𝚝𝚝𝚕𝚎 voltoai]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
                        InlineKeyboardButton(
                              text="[► Add me◄]",
-                             url="https://t.me/Shukurenaiprobot?startgroup=true")
+                             url="https://t.me/aigarrobot?startgroup=true")
                      ] 
                 ]
             ),
