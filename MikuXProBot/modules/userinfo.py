@@ -240,10 +240,10 @@ def info(update: Update, context: CallbackContext):
     [
                         InlineKeyboardButton(
                              text="Health",
-                             url="https://t.me/MikuXproBot?start=health"),
+                             url="https://t.me/aigarrobot?start=health"),
                        InlineKeyboardButton(
                              text="Disasters",
-                             url="https://t.me/MikuXproBot?start=disasters"),
+                             url="https://t.me/aigarrobot t?start=disasters"),
                     ],
     ]
     user_id = extract_user(update.effective_message, args)
@@ -468,15 +468,15 @@ def stats(update, context):
             status
             + "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
-            + f"\n\n[✦ Support](https://t.me/{SUPPORT_CHAT}) | [✦ Updates](https://t.me/MikuXUpdates)\n\n"
-            + "\n╘══「 by [卄σ∂αкα](https://t.me/h0daka) 」\n",
+            + f"\n\n[✦ Support](https://t.me/{SUPPORT_CHAT}) | [✦ Updates](https://t.me/aigar_Updates)\n\n"
+            + "\n╘══「 by [owner](https://t.me/sivathe_boss) 」\n",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
                        InlineKeyboardButton(
                              text="Repo",
-                             url="github.com/H0daka/Miku-Nakano")
+                             url="github.com/Sivatheking/aigar-robot")
                      ] 
                 ]
             ),
@@ -489,9 +489,9 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [Updates](https://t.me/MikuXUpdates)\n\n"
+                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [Updates](https://t.me/aigar_Updates)\n\n"
                 )
-                + "╘══「 by [卄σ∂αкα](https://t.me/h0daka) 」\n"
+                + "╘══「 by [owner](https://t.me/Sivathe_boss) 」\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
@@ -499,7 +499,7 @@ def stats(update, context):
                   [                  
                        InlineKeyboardButton(
                              text="Repo",
-                             url="github.com/H0daka/Miku-Nakano")
+                             url="github.com/Sivatheking/aigar-robot")
                      ] 
                 ]
             ),
