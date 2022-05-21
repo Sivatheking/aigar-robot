@@ -13,3 +13,4 @@ services:
       DEV_USERS: $DEV_USERS
       DEMONS: $DEMONS
       WOLVES: $WOLVES
+      PORT: $PORT
