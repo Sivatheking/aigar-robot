@@ -4,4 +4,8 @@ services:
     build: .
     environment:
       APP_ID: $API_ID
-      API
+      API_HASH: $API_HASH
+      OWNER_ID: $OWNER_ID
+      OWNER_USERNAME: $OWNER_USERNAME
+      SUPPORT_CHAT: $SUPPORT_CHAT
+      
