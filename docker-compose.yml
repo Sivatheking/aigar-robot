@@ -12,3 +12,4 @@ services:
       DRAGONS: $DRAGONS
       DEV_USERS: $DEV_USERS
       DEMONS: $DEMONS
+      WOLVES: $WOLVES
