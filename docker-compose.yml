@@ -3,4 +3,5 @@ services:
   worker:
     build: .
     environment:
-      
+      APP_ID: $API_ID
+      API
