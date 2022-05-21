@@ -1,6 +1,6 @@
 
 <h1> OKTETO AVAILABLE </h1>
-<p> VARIABLES <br>
+<p> VARIABLES 
 Owner id
 Owner username
 Support chat
