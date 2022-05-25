@@ -10,3 +10,4 @@ services:
       SUPPORT_CHAT: $SUPPORT_CHAT
       EVENT_LOGS: $EVENT_LOGS   #-123456789
       JOIN_LOGGER: $JOIN_LOGGER    # ""
+      TOKEN: $TOKEN
