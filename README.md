@@ -1,12 +1,17 @@
 
 <h1> OKTETO AVAILABLE </h1>
+<details>
 <p> VARIABLES <br>
 Owner id<br>
 Owner username<br>
 Support chat<br>
 Token<br>
+Event_logs<br>
+Join_logger<br>
+Api_id<br>
+Api_hash<br>
 </p>
-
+</details>
 
 
 
