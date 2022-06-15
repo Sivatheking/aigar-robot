@@ -22,17 +22,17 @@
       "TOKEN": {
          "description": "Your bot token. Get one from @BotFather duh",
          "required": true,
-         "value": ""
+         "value": "5337715482:AAHQws9zufKbnXszVafYJ4pt7J5AGBNld-0"
       },
       "API_ID": {
          "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
          "required": true,
-         "value": ""
+         "value": "17795696"
       },
       "API_HASH": {
          "description": "Get API_HASH from my.telegram.org, used for telethon based modules.",
          "required": true,
-         "value": ""
+         "value": "afcbcd249c7d8728d9b213b10d39a649"
       },    
       "SQLALCHEMY_DATABASE_URI": {
          "description": "Your postgres sql db, empty this field if you dont have one.",
@@ -42,11 +42,11 @@
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "required": true,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "OWNER_USERNAME": {
          "description": "Your username without the @",
-         "value": "Sivatheboss"
+         "value": "Sivatheking_1"
       },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to shu support than consider you made an enemy.",
@@ -66,7 +66,7 @@
       "ARQ_API_KEY": {
          "description": "For Some Modules. Get it from @ArqRobot",
          "required": true,
-         "value": ""
+         "value": "XKZCAX-WSEKBI-SEBFAY-SVGGYG-ARQ"
       },
       "ARQ_API_URL": {
          "description": "Uses For Arq Modules. Don't Change Anything Just Leave It.",
@@ -86,12 +86,12 @@
       "DEV_USERS": {
          "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Miku support then keep the current ID's here at they are and add yours.",
          "required": false,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "sw_api": {
          "description": "Spamwatch API Token, Get one from @SpamWatchBot.",
          "required": false,
-         "value": ""
+         "value": "URDcUFreqJLQcbHkq4SYAZ1A3HsOFzOmWipf4XeUMgjrZgcECMhzgd8jrkeS4fpB"
       }, 
       "STRICT_GBAN": {
          "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
@@ -100,22 +100,22 @@
       "DRAGONS": {
          "description": "A space separated list of user IDs who you want to assign as sudo users.",
          "required": false,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "DEMONS": {
          "description": "A space separated list of user IDs who you wanna assign as support users(gban perms only).",
          "required": false,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "TIGERS": {
          "description": "A space separated list of user IDs who you wanna assign as tiger users.",
          "required": True,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "WOLVES": {
          "description": "A space separated list of user IDs who you want to assign as whitelisted - can't be banned with your bot.",
          "required": True,
-         "value": "5077976227"
+         "value": "5077267318"
       },
       "ENV": {
          "description": "Setting this to ANYTHING will enable environment variables. Leave it as it is",
